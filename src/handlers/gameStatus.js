@@ -4,4 +4,5 @@ const gameStatus = (sessions) => (req, res, next) => {
 
   res.json({ isStarted });
 };
+
 exports.gameStatus = gameStatus;
