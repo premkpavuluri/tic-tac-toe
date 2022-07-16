@@ -10,12 +10,8 @@ const { gameDetails } = require("./handlers/gameDetails");
 const createApp = () => {
   const app = express();
   const sessions = {};
-  const game = {
-    player1: [],
-    player2: [],
-    currentPlayer: 'player1',
-    status: 'inprogress'
-  };
+  const players = [];
+  let game;
 
   const middleware = [
     express.json(),
@@ -26,8 +22,8 @@ const createApp = () => {
 
   app.use(middleware);
 
-  app.post('/join-game', addPlayer(sessions));
-  app.get('/game-status', gameStatus(sessions));
+  app.post('/join-game', addPlayer(players, sessions));
+  app.get('/game-status', gameStatus(players));
   app.get('/game-details', gameDetails(game));
   app.post('/update-game', updateGame(game));
 

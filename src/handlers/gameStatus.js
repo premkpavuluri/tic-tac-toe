@@ -1,6 +1,5 @@
-const gameStatus = (sessions) => (req, res, next) => {
-  const playersCount = Object.keys(sessions).length;
-  const isStarted = playersCount === 2;
+const gameStatus = (players) => (req, res, next) => {
+  const isStarted = players.length === 2;
 
   res.json({ isStarted });
 };
