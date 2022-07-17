@@ -6,14 +6,16 @@ const { injectSession } = require('./handlers/sessionHandler.js');
 const { updateGame } = require("./handlers/updateGame");
 const { logRequest } = require("./handlers/logRequest");
 const { gameDetails } = require("./handlers/gameDetails");
+const { launchGame } = require("./handlers/launchGame");
 
 const createApp = () => {
   const app = express();
   const sessions = {};
   const players = [];
-  let game;
+  const gameInfo = {};
 
   const middleware = [
+    express.urlencoded({ extended: true }),
     express.json(),
     logRequest,
     injectCookie,
@@ -23,9 +25,10 @@ const createApp = () => {
   app.use(middleware);
 
   app.post('/join-game', addPlayer(players, sessions));
-  app.get('/game-status', gameStatus(players));
-  app.get('/game-details', gameDetails(game));
-  app.post('/update-game', updateGame(game));
+  app.get('/game-status', gameStatus(players), launchGame(players, gameInfo));
+
+  app.get('/game-details', gameDetails(gameInfo));
+  app.post('/update-game', updateGame(gameInfo));
 
   app.use(express.static('public'));
 

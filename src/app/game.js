@@ -37,6 +37,7 @@ class Game {
 
   update(move) {
     this.#currentPlayer.moves.push(move);
+
     if (hasPlayerWon(this.#currentPlayer.moves)) {
       return;
     }
@@ -52,7 +53,7 @@ class Game {
       player1Moves: this.#player1.moves,
       player2Moves: this.#player2.moves,
       currentPlayer: {
-        id: this.#currentPlayer.id,
+        id: this.#currentPlayer.playerId,
         name: this.#currentPlayer.name
       },
       status: this.#getGameStatus(),

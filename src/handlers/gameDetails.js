@@ -1,4 +1,7 @@
-const gameDetails = (game) => (req, res) => {
-  res.json(game);
+const gameDetails = (gameInfo) => (req, res) => {
+  const { game } = gameInfo;
+
+  res.json(game.getState());
 };
-exports.gameDetails = gameDetails;
+
+module.exports = { gameDetails };

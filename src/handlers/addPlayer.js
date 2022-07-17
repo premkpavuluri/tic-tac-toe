@@ -10,7 +10,7 @@ const addPlayer = (players, sessions) => (req, res) => {
   sessions[session.sessionId] = session;
 
   const playerId = players.length + 1;
-  const player = { username, playerId };
+  const player = { name: username, playerId, moves: [] };
   players.push(player);
 
   res.cookie('sessionId', session.sessionId);
