@@ -7,6 +7,7 @@ const { updateGame } = require("./handlers/updateGame");
 const { logRequest } = require("./handlers/logRequest");
 const { gameDetails } = require("./handlers/gameDetails");
 const { launchGame } = require("./handlers/launchGame");
+const { authenticate } = require("./handlers/authenticate");
 
 const createApp = () => {
   const app = express();
@@ -25,6 +26,7 @@ const createApp = () => {
   app.use(middleware);
 
   app.post('/join-game', addPlayer(players, sessions));
+  app.use(authenticate);
   app.get('/game-status', gameStatus(players), launchGame(players, gameInfo));
 
   app.get('/game-details', gameDetails(gameInfo));

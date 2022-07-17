@@ -4,10 +4,10 @@
 
   - [ ] Write tests for the game
   - [ ] Make join game to restrict the player if max-players reached.
-  - [ ] Make authenticator to allow only registered players.
 
 - **DONE:**
-
+  - [x] Make authenticator to allow only registered players.
+  - [x] Make handler to unauthorized players using session.
   - [x] Change the contract of `addPlayer`
   - [x] Extract game entity 
   - [x] Separate handlers in different files
