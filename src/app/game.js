@@ -45,7 +45,11 @@ class Game {
   }
 
   #getGameStatus() {
-    return hasPlayerWon(this.#currentPlayer.moves) ? this.#currentPlayer.name : 'inprogress';
+    return hasPlayerWon(this.#currentPlayer.moves) ? 'won' : 'inprogress';
+  }
+
+  #determineResult() {
+    return this.#getGameStatus() === 'won' ? this.#currentPlayer.name : '';
   }
 
   getState() {
@@ -57,6 +61,7 @@ class Game {
         name: this.#currentPlayer.name
       },
       status: this.#getGameStatus(),
+      result: this.#determineResult()
     };
   }
 }

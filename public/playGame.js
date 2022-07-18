@@ -18,6 +18,17 @@ const xhrRequest = (request, onStatus, handler, altHandler, body = '') => {
 
 const identity = (x) => x;
 
+const updateMessage = (message) => {
+  const messageEle = document.getElementById('message');
+
+  messageEle.innerText = message;
+};
+
+const disableCells = () => {
+  const board = document.querySelector('.board');
+  board.removeEventListener('onclick', validateMove);
+};
+
 const renderCells = (cells, symbol) => {
   cells.forEach((cell) => {
     const cellElement = document.getElementById(cell.toString());
@@ -26,9 +37,18 @@ const renderCells = (cells, symbol) => {
 };
 
 const renderBoard = (xhr) => {
-  const { player1Moves, player2Moves } = JSON.parse(xhr.responseText);
+  const { player1Moves, player2Moves, status, result } = JSON.parse(xhr.responseText);
+
   renderCells(player1Moves, 'X');
   renderCells(player2Moves, 'O');
+
+
+  if (status === 'won') {
+    console.log(result);
+    updateMessage(`${result} has won the match`);
+    disableCells();
+    return;
+  }
 };
 
 const updateBoard = (xhr) => {
@@ -55,10 +75,8 @@ const validateMove = (event) => {
   xhr.onload = () => {
     const { isMyTurn } = JSON.parse(xhr.responseText);
     if (isMyTurn) {
-      return sendMove(move);
+      sendMove(move);
     }
-
-    console.log(isMyTurn);
   };
 
   xhr.open(req.method, req.url);
@@ -68,6 +86,10 @@ const validateMove = (event) => {
 const play = () => {
   const board = document.querySelector('.board');
   board.onclick = validateMove;
+
+  const intervalId = setInterval(() => {
+    updateBoard();
+  }, 1000);
 };
 
 window.onload = play;
