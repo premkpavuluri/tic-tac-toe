@@ -26,13 +26,13 @@ const createApp = () => {
   app.use(middleware);
 
   app.post('/join-game', addPlayer(players, sessions));
+  app.use(express.static('public'));
+
   app.use(authenticate);
   app.get('/game-status', gameStatus(players), launchGame(players, gameInfo));
 
   app.get('/game-details', gameDetails(gameInfo));
   app.post('/update-game', updateGame(gameInfo));
-
-  app.use(express.static('public'));
 
   return app;
 };

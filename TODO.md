@@ -4,6 +4,7 @@
 
   - [ ] Write tests for the game
   - [ ] Make join game to restrict the player if max-players reached.
+  - [ ] Navigate the user to game if already login.
 
 - **DONE:**
   - [x] Make authenticator to allow only registered players.

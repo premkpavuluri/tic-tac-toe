@@ -1,0 +1,23 @@
+body {
+  margin: 100 auto;
+  width: 720px;
+}
+
+.board {
+  width: 600px;
+  height: 600px;
+}
+
+.title {
+  text-align: center;
+}
+
+.row {
+  display: flex;
+}
+
+.row>div {
+  width: 200px;
+  height: 200px;
+  border: 1px solid black;
+}
